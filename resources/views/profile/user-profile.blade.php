@@ -50,7 +50,7 @@
             </div>
 
             <!-- Posts -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <!-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Posts</h4>
                     @forelse (Auth::user()->posts ?? [] as $post)
@@ -62,7 +62,7 @@
                         <p class="text-gray-700 dark:text-gray-300">No posts yet. Share your thoughts!</p>
                     @endforelse
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </x-app-layout>
