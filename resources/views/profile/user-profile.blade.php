@@ -17,7 +17,7 @@
                     <div class="flex items-center space-x-4 mb-6">
                         <!-- Profile Picture -->
                         <div class="w-24 h-24 rounded-full overflow-hidden">
-                            <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" width="150" height="150">
+                            <img src="{{ Auth::user()->profile_picture ? Storage::url(Auth::user()->profile_picture) : asset('storage/profile-pictures/default-avatar.jpg') }}" alt="Profile Picture" width="150" height="150">
                         </div>
                         <div>
                             <!-- Name -->
@@ -29,6 +29,14 @@
                                 {{ Auth::user()->email }}
                             </p>
                         </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Address</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {{ Auth::user()->address ?? 'No address provided.' }}
+                        </p>
                     </div>
                     
                     <!-- Bio -->

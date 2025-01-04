@@ -35,10 +35,13 @@ class ProfileController extends Controller
             }
             $path = $request->file('profile_picture')->store('profile-pictures', 'public');
             $user->profile_picture = $path;
+        } elseif (!$user->profile_picture) {
+            $user->profile_picture = 'profile-pictures/default-avatar.jpg';
         }
 
-        // Update the bio field
+        // Update the bio and address fields
         $user->bio = $request->input('bio');
+        $user->address = $request->input('address');
 
         $user->save();
 
