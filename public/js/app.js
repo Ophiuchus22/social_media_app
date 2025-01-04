@@ -96,6 +96,44 @@ app.controller('PostController', ['$scope', '$http', function($scope, $http) {
             });
     };
 
+    // Edit post
+    $scope.editPost = function(post) {
+        post.editing = true;
+        post.editedContent = post.content;
+    };
+
+    // Save edited post
+    $scope.updatePost = function(post) {
+        $http.put('/api/posts/' + post.id, {
+            content: post.editedContent
+        })
+        .then(function(response) {
+            post.content = post.editedContent;
+            post.editing = false;
+        })
+        .catch(function(error) {
+            console.error('Error updating post:', error);
+            alert('Error updating post. Please try again.');
+        });
+    };
+
+    // Delete comment
+    $scope.deleteComment = function(post, comment) {
+        if (!confirm('Are you sure you want to delete this comment?')) return;
+
+        $http.delete('/api/comments/' + comment.id)
+            .then(function(response) {
+                const index = post.comments.indexOf(comment);
+                if (index > -1) {
+                    post.comments.splice(index, 1);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error deleting comment:', error);
+                alert('Error deleting comment. Please try again.');
+            });
+    };
+
     // Initial load of posts
     $scope.getPosts();
 }]);

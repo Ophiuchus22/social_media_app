@@ -33,4 +33,25 @@ class PostController extends Controller
         $post->delete();
         return response()->json(['message' => 'Post deleted']);
     }
+
+    public function update(Request $request, Post $post)
+    {
+        // Check if user is authorized to update this post
+        if ($request->user()->id !== $post->user_id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $validated = $request->validate([
+            'content' => 'required|string|max:1000',
+        ]);
+
+        $post->update([
+            'content' => $validated['content']
+        ]);
+
+        return response()->json([
+            'message' => 'Post updated successfully',
+            'post' => $post
+        ]);
+    }
 }
