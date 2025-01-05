@@ -31,6 +31,33 @@
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
 
+        <div class="mb-6">
+            <x-input-label for="birthdate" :value="__('Birth Date')" />
+            <x-text-input id="birthdate" 
+                          name="birthdate" 
+                          type="date" 
+                          class="mt-1 block w-full"
+                          :value="old('birthdate', $user->birthdate?->format('Y-m-d'))"
+                          :max="now()->subYears(13)->format('Y-m-d')"
+                          required />
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You must be at least 13 years old.</p>
+            <x-input-error class="mt-2" :messages="$errors->get('birthdate')" />
+        </div>
+
+        <div class="mb-6">
+            <x-input-label for="gender" :value="__('Gender')" />
+            <select id="gender" 
+                    name="gender" 
+                    class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                    required>
+                <option value="">Select gender</option>
+                <option value="male" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                <option value="female" {{ old('gender', $user->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                <option value="other" {{ old('gender', $user->gender) == 'other' ? 'selected' : '' }}>Other</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('gender')" />
+        </div>
+
         <div>
             <x-input-label for="bio" :value="__('Bio')" />
             <textarea id="bio" name="bio" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="4">{{ old('bio', $user->bio) }}</textarea>

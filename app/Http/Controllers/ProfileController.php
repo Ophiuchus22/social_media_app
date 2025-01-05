@@ -42,6 +42,10 @@ class ProfileController extends Controller
         // Update the bio and address fields
         $user->bio = $request->input('bio');
         $user->address = $request->input('address');
+        
+        // Update birthdate and gender
+        $user->birthdate = $request->input('birthdate');
+        $user->gender = $request->input('gender');
 
         $user->save();
 

@@ -28,6 +28,14 @@
                             <p class="text-gray-600 dark:text-gray-400">
                                 {{ Auth::user()->email }}
                             </p>
+                            <!-- Gender -->
+                            <p class="text-gray-600 dark:text-gray-400 mt-1">
+                                {{ ucfirst(Auth::user()->gender ?? 'Not specified') }}
+                            </p>
+                            <!-- Birthdate -->
+                            <p class="text-gray-600 dark:text-gray-400">
+                                {{ Auth::user()->birthdate ? Auth::user()->birthdate->format('F d, Y') : 'Birth date not set' }}
+                            </p>
                         </div>
                     </div>
 

@@ -50,6 +50,43 @@
                     @enderror
                 </div>
 
+                <!-- Birthdate -->
+                <div class="mb-6">
+                    <label for="birthdate" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                        {{ __('Birth Date') }}
+                    </label>
+                    <input id="birthdate" 
+                           type="date" 
+                           name="birthdate" 
+                           value="{{ old('birthdate') }}"
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent dark:bg-gray-700 dark:text-white text-gray-900 shadow-sm"
+                           max="{{ now()->subYears(13)->format('Y-m-d') }}"
+                           required>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You must be at least 13 years old to register.</p>
+                    @error('birthdate')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Gender -->
+                <div class="mb-6">
+                    <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                        {{ __('Gender') }}
+                    </label>
+                    <select id="gender" 
+                            name="gender" 
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent dark:bg-gray-700 dark:text-white text-gray-900 shadow-sm"
+                            required>
+                        <option value="">Select gender</option>
+                        <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                        <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                        <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
+                    </select>
+                    @error('gender')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
